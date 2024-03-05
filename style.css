@@ -1,0 +1,27 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-image:url("https://images.unsplash.com/photo-1552083375-1447ce886485?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njd8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D");
+    background-repeat: no-repeat; 
+    background-size:cover;  
+}
+
+body nav{
+    border: 2px solid rgb(129, 212, 238);
+    box-shadow: 1px 1px 1px gold;
+}
+.card{
+    border:0.5px double ghostwhite;
+    background-color: rgba(0,0,0,0.4);
+    font-size: 20px;
+    height: 18rem;
+    color: rgb(237, 221, 253);
+}
+
+.table{
+    
+}

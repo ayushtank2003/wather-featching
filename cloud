@@ -1,0 +1,91 @@
+  document.addEventListener("DOMContentLoaded", function () {
+    // Debugging: Check if the script is running after DOMContentLoaded event
+    console.log("Script is running after DOMContentLoaded event");
+  
+    const submitButton = document.getElementById("submit");
+    const cityInput = document.getElementById("city");
+  
+    submitButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const city = cityInput.value.trim(); // Trim whitespace from the input
+      if (city) {
+        getWeather(city);
+      } else {
+        console.error("Please enter a city name.");
+      }
+    });
+  
+    // Initial weather data for default city
+    getWeather("Delhi");
+  });
+
+  let cityName; // Declare cityName variable
+
+  
+  // Define getWeather function in the global scope
+  async function getWeather(city) {
+    cityName = city; 
+    
+    const url = `https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=${city}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "f3674b3b10msh2a460f4e31e1beep14f302jsnc15176ba14ae",
+        "X-RapidAPI-Host": "weather-by-api-ninjas.p.rapidapi.com",
+      },
+    };
+  
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json(); // Parse JSON response
+  
+      // Debugging: Log the data to see its structure
+      console.log("Weather data:", data);
+  
+      // Access weather data properties from parsed JSON
+      const temp = data.temp;
+      const feels_like = data.feels_like;
+      const humidity = data.humidity;
+      const min_temp = data.min_temp;
+      const max_temp = data.max_temp;
+      const wind_speed = data.wind_speed;
+      const wind_degrees = data.wind_degrees;
+      const sunrise = data.sunrise;
+      const sunset = data.sunset;
+  
+      // Update HTML elements with weather data if they exist
+      updateElement("temp", temp);
+      updateElement("feels_like", feels_like);
+      updateElement("humidity", humidity);
+      updateElement("min_temp", min_temp);
+      updateElement("max_temp", max_temp);
+      updateElement("wind_speed", wind_speed);
+      updateElement("wind_degrees", wind_degrees);
+      updateElement("sunrise", sunrise);
+      updateElement("sunset", sunset);
+  
+      // Log weather data
+      console.log("Weather data:", {
+        temp,
+        feels_like,
+        humidity,
+        min_temp,
+        max_temp,
+        wind_speed,
+        wind_degrees,
+        sunrise,
+        sunset,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  function updateElement(id, value) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.innerHTML = value;
+    } else {
+      console.error("Element with ID", id, "not found.");
+    }
+  }
